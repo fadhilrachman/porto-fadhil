@@ -74,47 +74,28 @@ const PublicationCard = ({
   };
 
   const renderPublications = () => {
-    return publications.map((item, index) => (
-      <a
-        className="card shadow-lg compact bg-base-100 cursor-pointer"
-        key={index}
-        href={item.link}
-        target="_blank"
-        rel="noreferrer"
-      >
-        <div className="p-8 h-full w-full">
-          <div className="flex items-center flex-col">
-            <div className="w-full">
-              <div className="px-4">
-                <div className="text-center w-full">
-                  <h2 className="font-medium opacity-60 mb-2">{item.title}</h2>
-                  {item.conferenceName && (
-                    <p className="text-base-content opacity-50 text-sm">
-                      {item.conferenceName}
-                    </p>
-                  )}
-                  {item.journalName && (
-                    <p className="text-base-content opacity-50 text-sm">
-                      {item.journalName}
-                    </p>
-                  )}
-                  {item.authors && (
-                    <p className="text-base-content opacity-50 text-sm">
-                      Author: {item.authors}
-                    </p>
-                  )}
-                  {item.description && (
-                    <p className="mt-2 text-base-content text-opacity-60 text-sm text-justify">
-                      {item.description}
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </a>
-    ));
+    return (
+      <div className="card space-y-2 text-opacity-60  font-normal text-base-content p-4 shadow-lg compact bg-base-100 cursor-pointer">
+        <p>
+          {' '}
+          Hello, I am a Software Engineer with 2 years experiences, started
+          studying programming in 2021 and started my career in 2022, my daily
+          activity is working as a Fulltime Fullstack Developer and also when I
+          took a job part time Freelance Web Developer
+        </p>
+        <p>
+          {' '}
+          I am very interested in the world of software development and
+          committed to continuing to learn and develop in this field. I am a
+          graduate of MERN fullstack Bootcamp (MongoDB, ExpressJS, ReactJS, and
+          NodeJS) 4 months fullstack bootcamp at Eduwork.id. At Bootcamp this I
+          learned a lot about the entire technology stack MERN, including
+          MongoDB database, ExpressJS framework for the side development server,
+          ReactJS framework for front-end development, and NodeJS runtime
+          environment
+        </p>
+      </div>
+    );
   };
 
   return (
@@ -126,19 +107,11 @@ const PublicationCard = ({
               <div className="card-body">
                 <div className="mx-3 flex items-center justify-between mb-2">
                   <h5 className="card-title">
-                    {loading ? (
-                      skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
-                    ) : (
-                      <span className="text-base-content opacity-70">
-                        Publications
-                      </span>
-                    )}
+                    <span className="text-base-content opacity-70">About</span>
                   </h5>
                 </div>
                 <div className="col-span-2">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {loading ? renderSkeleton() : renderPublications()}
-                  </div>
+                  <div className="">{renderPublications()}</div>
                 </div>
               </div>
             </div>

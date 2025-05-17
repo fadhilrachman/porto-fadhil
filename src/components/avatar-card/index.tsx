@@ -2,7 +2,7 @@ import { FALLBACK_IMAGE } from '../../constants';
 import { Profile } from '../../interfaces/profile';
 import { skeleton } from '../../utils';
 import LazyImage from '../lazy-image';
-
+import ProfileImg from '../../assets/profile.jpeg';
 interface AvatarCardProps {
   profile: Profile | null;
   loading: boolean;
@@ -48,7 +48,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
             >
               {
                 <LazyImage
-                  src={profile.avatar ? profile.avatar : FALLBACK_IMAGE}
+                  src={ProfileImg}
                   alt={profile.name}
                   placeholder={skeleton({
                     widthCls: 'w-full',
@@ -83,7 +83,9 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
             </div>
           ) : (
             <a
-              href={resumeFileUrl}
+              href={
+                'https://docs.google.com/document/d/1Fg5skuNgMTvR-iLtcSIrFhem6NMEhWcu192jO9nTlmk/edit?tab=t.0'
+              }
               target="_blank"
               className="btn btn-outline btn-sm text-xs mt-6 opacity-50"
               download

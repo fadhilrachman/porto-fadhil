@@ -1,15 +1,13 @@
 import { Fragment } from 'react';
-import { AiOutlineFork, AiOutlineStar } from 'react-icons/ai';
-import { MdInsertLink } from 'react-icons/md';
 import { ga, getLanguageColor, skeleton } from '../../utils';
 import { GithubProject } from '../../interfaces/github-project';
-
+import { FaGithub } from 'react-icons/fa';
+import { CgLink } from 'react-icons/cg';
+import CUy from '../../assets/logo512.png';
 const GithubProjectCard = ({
-  header,
   githubProjects,
   loading,
   limit,
-  username,
   googleAnalyticsId,
 }: {
   header: string;
@@ -75,64 +73,61 @@ const GithubProjectCard = ({
 
   const renderProjects = () => {
     return githubProjects.map((item, index) => (
-      <a
-        className="card shadow-lg compact bg-base-100 cursor-pointer"
-        href={item.html_url}
-        key={index}
-        onClick={(e) => {
-          e.preventDefault();
-
-          try {
-            if (googleAnalyticsId) {
-              ga.event('Click project', {
-                project: item.name,
-              });
-            }
-          } catch (error) {
-            console.error(error);
-          }
-
-          window?.open(item.html_url, '_blank');
-        }}
-      >
+      <div className="card shadow-lg compact bg-base-100" key={index}>
         <div className="flex justify-between flex-col p-8 h-full w-full">
           <div>
-            <div className="flex items-center truncate">
+            <img src={item.img || '/placeholder.svg'} alt={item.name} />
+            <div className="flex items-center truncate mt-2">
               <div className="card-title text-lg tracking-wide flex text-base-content opacity-60">
-                <MdInsertLink className="my-auto" />
                 <span>{item.name}</span>
+                <span className="text-xs text-opacity-60 font-normal">
+                  #{item.language}
+                </span>
               </div>
             </div>
-            <p className="mb-5 mt-1 text-base-content text-opacity-60 text-sm">
+            <p className="mb-3 mt-1 text-base-content text-opacity-60 text-sm">
               {item.description}
             </p>
+
+            <div className="mb-3">
+              <div className="flex flex-wrap gap-2">
+                {item.tech_used.map((tech, techIndex) => (
+                  <span
+                    key={techIndex}
+                    className="m-1 text-xs inline-flex items-center font-bold leading-sm px-3 py-1 badge-primary bg-opacity-90 rounded-full"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
           <div className="flex justify-between text-sm text-base-content text-opacity-60 truncate">
-            <div className="flex flex-grow">
-              <span className="mr-3 flex items-center">
-                <AiOutlineStar className="mr-0.5" />
-                <span>{item.stargazers_count}</span>
-              </span>
-              <span className="flex items-center">
-                <AiOutlineFork className="mr-0.5" />
-                <span>{item.forks_count}</span>
-              </span>
-            </div>
-            <div>
-              <span className="flex items-center">
-                <div
-                  className="w-3 h-3 rounded-full mr-1 opacity-60"
-                  style={{ backgroundColor: getLanguageColor(item.language) }}
-                />
-                <span>{item.language}</span>
-              </span>
+            <div className="flex flex-grow justify-end space-x-3">
+              <a
+                href={item.github}
+                target="_blank"
+                className="btn btn-outline rounded-full btn-sm text-xs opacity-50"
+                download
+                rel="noreferrer"
+              >
+                <FaGithub size={20} />
+              </a>
+              <a
+                href={item.html_url}
+                target="_blank"
+                className="btn btn-outline rounded-full btn-sm text-xs opacity-50"
+                download
+                rel="noreferrer"
+              >
+                <CgLink size={20} />
+              </a>
             </div>
           </div>
         </div>
-      </a>
+      </div>
     ));
   };
-
   return (
     <Fragment>
       <div className="col-span-1 lg:col-span-2">
@@ -142,26 +137,10 @@ const GithubProjectCard = ({
               <div className="card-body">
                 <div className="mx-3 flex items-center justify-between mb-2">
                   <h5 className="card-title">
-                    {loading ? (
-                      skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
-                    ) : (
-                      <span className="text-base-content opacity-70">
-                        {header}
-                      </span>
-                    )}
+                    <span className="text-base-content opacity-70">
+                      My Personal Projects
+                    </span>
                   </h5>
-                  {loading ? (
-                    skeleton({ widthCls: 'w-10', heightCls: 'h-5' })
-                  ) : (
-                    <a
-                      href={`https://github.com/${username}?tab=repositories`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-base-content opacity-50 hover:underline"
-                    >
-                      See All
-                    </a>
-                  )}
                 </div>
                 <div className="col-span-2">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
