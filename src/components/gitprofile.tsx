@@ -1,13 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
-import axios, { AxiosError } from 'axios';
-import { formatDistance } from 'date-fns';
-import {
-  CustomError,
-  GENERIC_ERROR,
-  INVALID_CONFIG_ERROR,
-  INVALID_GITHUB_USERNAME_ERROR,
-  setTooManyRequestError,
-} from '../constants/errors';
+import { useEffect, useState } from 'react';
+import { CustomError, INVALID_CONFIG_ERROR } from '../constants/errors';
 import { HelmetProvider } from 'react-helmet-async';
 import '../assets/index.css';
 import { getInitialTheme, getSanitizedConfig, setupHotjar } from '../utils';
@@ -21,11 +13,8 @@ import AvatarCard from './avatar-card';
 import DetailsCard from './details-card';
 import SkillCard from './skill-card';
 import ExperienceCard from './experience-card';
-import CertificationCard from './certification-card';
 import GithubProjectCard from './github-project-card';
-import ExternalProjectCard from './external-project-card';
-import BlogCard from './blog-card';
-import Footer from './footer';
+
 import PublicationCard from './publication-card';
 import LMSImg from '../assets/projects/lms.png';
 import SijumImg from '../assets/projects/sijum.png';
@@ -44,7 +33,7 @@ const GitProfile = ({ config }: { config: Config }) => {
   );
   const [theme, setTheme] = useState<string>(DEFAULT_THEMES[0]);
   const [error, setError] = useState<CustomError | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading] = useState<boolean>(false);
 
   useEffect(() => {
     if (Object.keys(sanitizedConfig).length === 0) {

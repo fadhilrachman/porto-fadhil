@@ -1,14 +1,12 @@
 import { Fragment } from 'react';
-import { ga, getLanguageColor, skeleton } from '../../utils';
+import { skeleton } from '../../utils';
 import { GithubProject } from '../../interfaces/github-project';
 import { FaGithub } from 'react-icons/fa';
 import { CgLink } from 'react-icons/cg';
-import CUy from '../../assets/logo512.png';
 const GithubProjectCard = ({
   githubProjects,
   loading,
   limit,
-  googleAnalyticsId,
 }: {
   header: string;
   githubProjects: GithubProject[];
